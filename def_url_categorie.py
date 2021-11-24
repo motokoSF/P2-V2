@@ -3,10 +3,11 @@ from bs4 import BeautifulSoup
 import requests
 
 # Récupérer les liens de toutes les catégories du site à partir de l'url de base
+# retourne un dictionnaire 
 
 def get_url_categorie(url):
 
-    categories = []
+    categories = {}
     réponse = requests.get(url)
     soup = BeautifulSoup(réponse.text, 'html.parser')
     
@@ -14,7 +15,8 @@ def get_url_categorie(url):
     
     for category in categories_html.find_all("a"):
         category_link = url.replace("index.html", category.attrs["href"])
-        categories.append(category_link)
+        
+        categories[category.string.strip()] = category_link
 
     return categories
 

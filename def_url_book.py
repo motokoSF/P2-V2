@@ -6,7 +6,7 @@ import requests
 
 def get_url_book(link):
 
-    books = []
+    books =  []
     request_categories = requests.get(link)
     soup_book = BeautifulSoup(request_categories.text, 'html.parser')
    
