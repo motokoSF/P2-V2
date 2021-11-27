@@ -1,9 +1,14 @@
 from bs4 import BeautifulSoup
 import requests
+import urllib.request
+import os
+from urllib.parse import urljoin, urlparse
 
-# opérér le scraping des données à partir des liens de livres 
+# opérér le scraping des données à partir des liens de livres
+# générer un dictionnaire pour chaque livre
+# convertir l'url image en jpeg et l'integrer dans un dossier.   
 
-def get_data_book(book_link):
+def get_data_book(book_link, category):
 
     request_book = requests.get(book_link)
     soup_book = BeautifulSoup(request_book.content, 'html.parser')
@@ -29,8 +34,17 @@ def get_data_book(book_link):
     # review_rating
     data["review_rating"] = soup_book.find_all("p", class_="star-rating")[0].get("class")[1]
     # image_url
-    image = soup_book.find("div", class_="item active").img["src"]
-    data["image_url"] = "http://books.toscrape.com/" + image.replace('../', '')
+    image_html = soup_book.find("div", class_="item active").img["src"]
+    data["image_url"] = urljoin(book_link, image_html)
+    
+    
+    # créer le dossier image pour chaque catégorie 
+    if not os.path.isdir(f"books_to_scrap/images/{category}/"):
+        os.makedirs(f"books_to_scrap/images/{category}/")
+    # Avoir le nom du jpeg depuis  l'url
+    image_name = os.path.basename(urlparse(data["image_url"]).geturl())
+    # télécharger l'image
+    urllib.request.urlretrieve(data["image_url"] , f"books_to_scrap/images/{category}/{image_name}")
 
     return data
     

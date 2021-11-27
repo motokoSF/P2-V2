@@ -1,3 +1,4 @@
+from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import requests
 
@@ -14,14 +15,14 @@ def get_url_book(link):
 
     for book in book_html.find_all("li"):
         partial_link = book.article.h3.a
-        full_link = "https://books.toscrape.com/catalogue/" + partial_link.attrs["href"].replace("../../../", "")
+        full_link = urljoin(link, partial_link.attrs["href"])
         books.append(full_link)
     
 
     next_page = soup_book.find("li", class_ ="next")
     if next_page:
         next_partial_links = next_page.find("a")["href"]
-        next_full_link = link.rsplit("/", 1)[0] + "/" + next_partial_links.replace("../../../", "")
+        next_full_link = urljoin(link, next_partial_links)
         books.extend(get_url_book(next_full_link))
 
     return books

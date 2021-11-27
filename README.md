@@ -1,14 +1,34 @@
-# P2-V2
+# OpenClassrooms DA Python P2:
 
-Windows:
+Ce projet scrap le site <https://books.toscrape.com/>
+
+Pour chaque categorie le scraper genere des csv et un dossier image contenant  
+toutes les informations de chaque livre.
+
+* product_page_url
+* universal_ product_code (upc)
+* title
+* price_including_tax
+* price_excluding_tax
+* number_available
+* product_description
+* category
+* review_rating
+* image_url
 
 1. Création d'un environnement virtuel
-python -m venv nom_env_virtuel
-source nom_env_virtuel/Scripts/activate
-
-2. Installation des packages
+```bash 
+python3 -m venv <nom_env_virtuel>
+source <nom_env_virtuel>/Scripts/activate
+```
+2. Installation des dependences
+```bash
 pip install -r requirements.txt
-
+```
 3. Execution du script
-python main.py
+```bash 
+python3 main.py
+```
+
+
 

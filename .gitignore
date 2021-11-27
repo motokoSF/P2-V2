@@ -145,4 +145,5 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python
 
 # custom
-book_to_scrap/ 
+*books_to_scrap/images/ 
+*csv 
