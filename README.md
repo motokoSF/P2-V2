@@ -2,7 +2,7 @@
 
 Ce projet scrap le site <https://books.toscrape.com/>
 
-Pour chaque catégorie le scraper genere des csv et un dossier image contenant  
+Pour chaque catégorie le scraper génère des csv et un dossier image contenant  
 toutes les informations de chaque livre.
 
 * product_page_url
